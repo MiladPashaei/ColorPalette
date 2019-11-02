@@ -35,7 +35,7 @@ export class ColorBox extends Component {
           </div>
           <Link
             to={`/palette/${paletteId}/${id}`}
-            onClick={e => e.stopPropagation}
+            onClick={e => e.stopPropagation()}
           >
             <span className='see-more'>More</span>
           </Link>

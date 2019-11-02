@@ -10,8 +10,8 @@ import PaletteList from './PaletteList';
 
 export class App extends Component {
   findPalette(id) {
-    return seedColors.find(function(pallete) {
-      return pallete.id === id;
+    return seedColors.find(function(palette) {
+      return palette.id === id;
     });
   }
 
@@ -37,8 +37,16 @@ export class App extends Component {
           )}
         />
         <Route
-          path='/palette/:palletteId/:colorId'
-          render={routeProps => <SingleColorPalette />}
+          exact
+          path='/palette/:paletteId/:colorId'
+          render={routeProps => (
+            <SingleColorPalette
+              colorId={routeProps.match.params.colorId}
+              palette={generatePalette(
+                this.findPalette(routeProps.match.params.paletteId)
+              )}
+            />
+          )}
         />
       </Switch>
       // <div>
