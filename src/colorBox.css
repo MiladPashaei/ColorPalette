@@ -54,6 +54,12 @@
   text-transform: uppercase;
   font-size: 12px;
 }
+.light-text {
+  color: white;
+}
+.colorBox .dark-text {
+  color: #757575;
+}
 .see-more {
   background: rgba(255, 255, 255, 0.3);
   position: absolute;
@@ -67,6 +73,7 @@
   line-height: 30px;
   text-transform: uppercase;
 }
+
 .copy-overlay {
   opacity: 0;
   z-index: 10;
