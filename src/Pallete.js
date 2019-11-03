@@ -5,16 +5,6 @@ import PaletteFooter from './PaletteFooter';
 import { withStyles } from '@material-ui/styles';
 
 import Styles from './Styles/palleteStyle';
-// const Styles = {
-//   palette: {
-//     height: '100vh',
-//     display: 'flex',
-//     flexDirection: 'column'
-//   },
-//   colors: {
-//     height: '90%'
-//   }
-// };
 
 export class Pallete extends Component {
   constructor(props) {
