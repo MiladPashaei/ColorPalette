@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import chroma from 'chroma-js';
 
-import './colorBox.css';
 const styles = {
   ColorBox: {
     width: '20%',
