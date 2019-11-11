@@ -79,8 +79,9 @@ class NewPaletteForm extends Component {
   state = {
     open: true,
     currentColor: 'red',
-    newName: '',
-    colors: [{ name: 'red', color: 'red' }]
+    newColorName: '',
+    colors: [{ name: 'red', color: 'red' }],
+    newPaletteName: ''
   };
   componentDidMount() {
     // custom rule will have name 'isPasswordMatch'
@@ -91,6 +92,11 @@ class NewPaletteForm extends Component {
     );
     ValidatorForm.addValidationRule('isColorUnique', value =>
       this.state.colors.every(({ color }) => color !== this.state.currentColor)
+    );
+    ValidatorForm.addValidationRule('isPaletteNameUnique', value =>
+      this.props.palettes.every(
+        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
+      )
     );
   }
   handleDrawerOpen = () => {
@@ -105,14 +111,29 @@ class NewPaletteForm extends Component {
   };
 
   handleChange = e => {
-    this.setState({ newName: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
   addNewColor = () => {
     const newColor = {
       color: this.state.currentColor,
-      name: this.state.newName
+      name: this.state.newColorName
     };
-    this.setState({ colors: [...this.state.colors, newColor], newName: '' });
+    this.setState({
+      colors: [...this.state.colors, newColor],
+      newColorName: ''
+    });
+  };
+  handleSubmit = () => {
+    let newName = this.state.newPaletteName;
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, '-'),
+      colors: this.state.colors
+    };
+    this.props.savePalette(newPalette);
+    this.props.history.push('/');
   };
   render() {
     const { classes } = this.props;
@@ -123,6 +144,7 @@ class NewPaletteForm extends Component {
         <CssBaseline />
         <AppBar
           position='fixed'
+          color='default'
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open
           })}
@@ -136,9 +158,23 @@ class NewPaletteForm extends Component {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography variant='h6' color='inherit' noWrap>
               Persistent drawer
             </Typography>
+            <ValidatorForm onSubmit={this.handleSubmit}>
+              <TextValidator
+                label='Palette Name'
+                value={this.state.newPaletteName}
+                name='newPaletteName'
+                onChange={this.handleChange}
+                validators={['required', 'isPaletteNameUnique']}
+                errorMessages={['Enter Palette Name', 'Name Already Taken']}
+              />
+              <Button variant='contained' color='primary' type='submit'>
+                Save Palette
+              </Button>
+            </ValidatorForm>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -171,7 +207,8 @@ class NewPaletteForm extends Component {
           />
           <ValidatorForm onSubmit={this.addNewColor}>
             <TextValidator
-              value={this.state.newName}
+              value={this.state.newColorName}
+              name='newColorName'
               onChange={this.handleChange}
               validators={['required', 'isColorUnique', 'isColorNameUnique']}
               errorMessages={[
