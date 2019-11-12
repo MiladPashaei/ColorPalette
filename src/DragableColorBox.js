@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
-import transitions from '@material-ui/core/styles/transitions';
+
 const styles = {
   root: {
     width: '20%',
@@ -35,13 +35,16 @@ const styles = {
   }
 };
 function DragableColorBox(props) {
-  const { classes } = props;
+  const { classes, handleClick, name, color } = props;
   return (
-    <div className={classes.root} style={{ backgroundColor: props.color }}>
+    <div className={classes.root} style={{ backgroundColor: color }}>
       <div className={classes.boxContent}>
-        <span> {props.name}</span>
+        <span> {name}</span>
 
-        <DeleteForeverOutlinedIcon className={classes.deleteIcon} />
+        <DeleteForeverOutlinedIcon
+          onClick={handleClick}
+          className={classes.deleteIcon}
+        />
       </div>
     </div>
   );
