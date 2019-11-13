@@ -27,7 +27,9 @@ const styles = theme => ({
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    display: "flex",
+    alignItems: "center"
   },
   drawerHeader: {
     display: "flex",
@@ -52,6 +54,19 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginLeft: 0
+  },
+  buttons: { width: "100%" },
+  button: { width: "50%" },
+  container: {
+    width: "90%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  backbtn: {
+    marginRight: "12px"
   }
 });
 
@@ -135,34 +150,44 @@ class NewPaletteForm extends Component {
           }}
         >
           <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
+            <IconButton
+              className={classes.backbtn}
+              onClick={this.handleDrawerClose}
+            >
               <ChevronLeftIcon />
             </IconButton>
           </div>
           <Divider />
-          <Typography variant="h4">Design Your Palette!</Typography>
-          <div>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={this.clearColors}
-            >
-              Clear Palette
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.addRandomColor}
-              disabled={colors.length >= maxColors}
-            >
-              Random Color
-            </Button>
+          <div className={classes.container}>
+            <Typography variant="h4" gutterBottom>
+              Design Your Palette!
+            </Typography>
+            <div className={classes.buttons}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={this.clearColors}
+                className={classes.button}
+              >
+                Clear Palette
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.addRandomColor}
+                disabled={colors.length >= maxColors}
+                className={classes.button}
+              >
+                Random Color
+              </Button>
+            </div>
+
+            <ColorPickerForm
+              colors={colors}
+              maxColors={maxColors}
+              addNewColor={this.addNewColor}
+            />
           </div>
-          <ColorPickerForm
-            colors={colors}
-            maxColors={maxColors}
-            addNewColor={this.addNewColor}
-          />
         </Drawer>
         <main
           className={classNames(classes.content, {
