@@ -2,7 +2,7 @@ export default {
   palette: {
     display: "flex",
     flexDirection: "column",
-    height: "100vh
+    height: "100vh"
   },
   colors: {
     height: "90%"
