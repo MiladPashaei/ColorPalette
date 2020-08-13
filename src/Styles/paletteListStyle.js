@@ -1,17 +1,17 @@
 export default {
   root: {
-    height: "100vh",
+    height: "100%",
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
-    backgroundColor: "navy"
+    backgroundColor: "navy",
   },
   container: {
     width: "50%",
     display: "flex",
     alignItems: "flex-start",
     flexDirection: "column",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   nav: {
     display: "flex",
@@ -20,14 +20,14 @@ export default {
     color: "white",
     alignItems: "center",
     "& a ": {
-      color: "white"
-    }
+      color: "white",
+    },
   },
   palettes: {
     boxSizing: "border-box",
     width: "100%",
     display: "grid",
     gridTemplateColumns: "repeat(3, 30%)",
-    gridGap: "5%"
-  }
+    gridGap: "5%",
+  },
 };
